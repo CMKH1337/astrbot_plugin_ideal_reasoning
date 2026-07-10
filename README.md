@@ -2,7 +2,7 @@
   <img src="https://count.getloli.com/get/@astrbot_plugin_ideal_reasoning?theme=gelbooru-h" alt="访问计数" />
 </p>
 
-# AstrBot 多厂商推理强度切换插件
+# Astrbot 多厂商推理强度切换插件
 
 最近老是刷到claude code开启Ultracode装逼的视频，我也想装逼，于是这个插件诞生了。
 
