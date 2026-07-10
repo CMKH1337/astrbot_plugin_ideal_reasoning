@@ -1,6 +1,6 @@
 name: astrbot_plugin_reasoning_switch
-display_name: 多厂商思考深度切换
-desc: 支持多厂商全局指令及 LLM 会话级自动思考深度切换。
+display_name: 多厂商思考强度切换
+desc: 支持多厂商全局指令及 LLM 会话级自动思考强度切换。
 version: v1.0.0
 author: CMKH
 repo: https://github.com/CMKH1337/astrbot_plugin_ideal_reasoning
