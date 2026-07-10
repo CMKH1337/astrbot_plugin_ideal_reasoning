@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://count.getloli.com/get/@astrbot_plugin_ideal_reasoning?theme=gelbooru-h" alt="访问计数" />
+  <img src="https://count.getloli.com/get/@astrbot_plugin_ideal_reasoning?theme=booru-qualityhentais" alt="访问计数" />
 </p>
 
 # Astrbot 多厂商推理强度切换插件
