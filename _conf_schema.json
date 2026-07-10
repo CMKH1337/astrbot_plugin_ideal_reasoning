@@ -1,0 +1,135 @@
+{
+  "vendor": {
+    "type": "string",
+    "description": "推理参数适配厂商",
+    "default": "openai",
+    "options": [
+      "openai",
+      "anthropic",
+      "gemini_3",
+      "gemini_25",
+      "deepseek",
+      "xai"
+    ],
+    "hint": "选择当前聊天 Provider 实际使用的模型厂商。Gemini 原生 Provider 会自动写入 AstrBot 的 gm_thinking_config，OpenAI 兼容 Provider 则写入自定义请求体。",
+    "obvious_hint": true
+  },
+  "provider_vendor_map": {
+    "type": "template_list",
+    "description": "Provider 厂商分组",
+    "default": [],
+    "hint": "为每个 AstrBot 聊天 Provider 选择其实际模型厂商。会话通过 /provider 切换模型后，插件会自动按当前 Provider ID 使用对应参数；未配置的 Provider 使用上方全局兜底厂商。",
+    "obvious_hint": true,
+    "templates": {
+      "openai": {
+        "name": "OpenAI (GPT-5.5 / 5.6 / o3)",
+        "items": {
+          "provider_id": {
+            "type": "string",
+            "description": "OpenAI 模型 Provider",
+            "default": "",
+            "_special": "select_provider"
+          }
+        }
+      },
+      "anthropic": {
+        "name": "Anthropic (Claude 4 / Opus 4.8)",
+        "items": {
+          "provider_id": {
+            "type": "string",
+            "description": "Anthropic 模型 Provider",
+            "default": "",
+            "_special": "select_provider"
+          }
+        }
+      },
+      "gemini_3": {
+        "name": "Google Gemini 3.0 / 3.1 Pro",
+        "items": {
+          "provider_id": {
+            "type": "string",
+            "description": "Gemini 3 模型 Provider",
+            "default": "",
+            "_special": "select_provider"
+          }
+        }
+      },
+      "gemini_25": {
+        "name": "Google Gemini 2.5",
+        "items": {
+          "provider_id": {
+            "type": "string",
+            "description": "Gemini 2.5 模型 Provider",
+            "default": "",
+            "_special": "select_provider"
+          }
+        }
+      },
+      "deepseek": {
+        "name": "DeepSeek V4 Pro",
+        "items": {
+          "provider_id": {
+            "type": "string",
+            "description": "DeepSeek 模型 Provider",
+            "default": "",
+            "_special": "select_provider"
+          }
+        }
+      },
+      "xai": {
+        "name": "xAI (Grok 3 Mini / 4.X)",
+        "items": {
+          "provider_id": {
+            "type": "string",
+            "description": "xAI 模型 Provider",
+            "default": "",
+            "_special": "select_provider"
+          }
+        }
+      }
+    }
+  },
+  "enable_query_tool": {
+    "type": "bool",
+    "description": "向 LLM 注册推理选项查询工具",
+    "default": true,
+    "hint": "注册 get_reasoning_options。该工具只读，可让 LLM 查询当前厂商支持的等级和会话状态。"
+  },
+  "enable_set_tool": {
+    "type": "bool",
+    "description": "向 LLM 注册会话级推理设置工具",
+    "default": false,
+    "hint": "注册 set_reasoning_level。仅修改当前会话内存状态，不写入或重载 Provider 全局配置。",
+    "obvious_hint": true
+  },
+  "set_tool_admin_only": {
+    "type": "bool",
+    "description": "仅允许管理员会话使用设置工具",
+    "default": true,
+    "hint": "工具执行时主动调用 event.is_admin() 校验，不依赖指令权限装饰器。"
+  },
+  "allow_group_chat_tools": {
+    "type": "bool",
+    "description": "允许在群聊中使用设置工具",
+    "default": false
+  },
+  "llm_tool_max_level": {
+    "type": "string",
+    "description": "LLM 工具可设置的最高推理强度",
+    "default": "high",
+    "options": ["none", "minimal", "low", "medium", "high", "xhigh", "max"],
+    "hint": "不限制管理员 /think 和 /think_session 指令，只限制 LLM 自动调用 set_reasoning_level。"
+  },
+  "max_thinking_budget": {
+    "type": "int",
+    "description": "Gemini 2.5 工具最大 thinkingBudget",
+    "default": 8192,
+    "hint": "仅限制 LLM 设置工具；0 和 -1（动态）始终允许。"
+  },
+  "session_effective_requests": {
+    "type": "int",
+    "description": "会话临时设置的有效模型请求次数",
+    "default": 3,
+    "hint": "范围会被限制为 1 到 20。每次实际 Provider 请求消费一次，包括 Agent 工具循环中的后续请求。"
+  }
+}
